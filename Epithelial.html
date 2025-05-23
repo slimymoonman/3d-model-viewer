@@ -32,4 +32,66 @@
       font-size: 28px;
       border-radius: 50%;
       width: 56px;
-      heig
+      height: 56px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+      outline: none;
+    }
+
+    #playPauseBtn:hover {
+      background-color: rgba(128, 128, 128, 0.9);
+    }
+
+    #playPauseBtn:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <model-viewer
+    id="model"
+    src="Epithelial_v01_tk001.glb"
+    alt="3D model of epithelial cell"
+    autoplay
+    animation-name="*"
+    auto-rotate
+    camera-controls
+    interaction-prompt="auto"
+    interaction-prompt-threshold="3000"
+    disable-zoom
+    environment-image="neutral"
+    shadow-intensity="0"
+    exposure="1"
+    style="background-color: transparent;">
+  </model-viewer>
+
+  <button id="playPauseBtn" aria-label="Pause Animation" title="Pause Animation">⏸️</button>
+
+  <script>
+    const model = document.getElementById('model');
+    const btn = document.getElementById('playPauseBtn');
+    let isPlaying = true;
+
+    btn.addEventListener('click', () => {
+      if (isPlaying) {
+        model.pause();
+        btn.textContent = '▶️';
+        btn.setAttribute('aria-label', 'Play Animation');
+        btn.setAttribute('title', 'Play Animation');
+      } else {
+        model.play();
+        btn.textContent = '⏸️';
+        btn.setAttribute('aria-label', 'Pause Animation');
+        btn.setAttribute('title', 'Pause Animation');
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
+</body>
+</html>
