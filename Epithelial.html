@@ -1,24 +1,54 @@
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-
-<model-viewer 
-  id="myModel" 
-  src="https://slimymoonman.github.io/3d-model-viewer/Epithelial_v01_tk001.glb" 
-  alt="Epithelial Model"
-  camera-controls 
-  style="width: 600px; height: 400px; background: transparent;">
-</model-viewer>
-
-<script>
-  const model = document.getElementById('myModel');
-  let animationPlaying = false;
-
-  model.addEventListener('click', () => {
-    if(animationPlaying) {
-      model.pause();  // pause animation
-      animationPlaying = false;
-    } else {
-      model.play();   // play animation
-      animationPlaying = true;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Epithelial Model Viewer</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #00000000; /* transparent background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-  });
-</script>
+    model-viewer {
+      width: 600px;
+      height: 400px;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <model-viewer 
+    id="myModel" 
+    src="https://slimymoonman.github.io/3d-model-viewer/Epithelial_v01_tk001.glb" 
+    alt="Epithelial Model"
+    camera-controls
+    autoplay
+    style="background: transparent;"
+  ></model-viewer>
+
+  <script>
+    const model = document.getElementById('myModel');
+    let animationPlaying = true; // starts playing on load because of autoplay attribute
+
+    model.addEventListener('click', () => {
+      if(animationPlaying) {
+        model.pause();
+        animationPlaying = false;
+      } else {
+        model.play();
+        animationPlaying = true;
+      }
+    });
+  </script>
+
+</body>
+</html>
