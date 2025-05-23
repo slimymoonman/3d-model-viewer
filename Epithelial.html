@@ -2,12 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Animated Model Viewer</title>
+  <title>Epithelial Cell Animation</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    body { margin: 0; font-family: sans-serif; text-align: center; background: #111; color: white; }
-    #controls { padding: 1em; }
-    model-viewer { width: 100%; height: 80vh; }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      text-align: center;
+      background: #111; /* You can change this to transparent if embedding elsewhere */
+      color: white;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 80vh;
+      background-color: transparent;
+    }
+
+    #controls {
+      padding: 1em;
+    }
+
     button, select {
       margin: 0.5em;
       padding: 0.5em 1em;
@@ -17,11 +32,11 @@
 </head>
 <body>
 
-  <h1>Animated 3D Model</h1>
+  <h1>Epithelial Cell Animation</h1>
 
   <model-viewer id="mv"
     src="Epithelial_v01_tk001.glb"
-    alt="A 3D model"
+    alt="A 3D model of an epithelial cell"
     auto-rotate
     camera-controls
     autoplay
@@ -45,39 +60,6 @@
   </div>
 
   <script>
-    const viewer = document.getElementById('mv');
-    const playBtn = document.getElementById('play');
-    const pauseBtn = document.getElementById('pause');
-    const animationSelect = document.getElementById('animationSelect');
+    const
 
-    // Play button
-    playBtn.addEventListener('click', () => viewer.play());
-
-    // Pause button
-    pauseBtn.addEventListener('click', () => viewer.pause());
-
-    // Load available animations
-    viewer.addEventListener('load', () => {
-      const animations = viewer.availableAnimations;
-      animationSelect.innerHTML = '<option value="">-- Choose Animation --</option>';
-      animations.forEach(name => {
-        const option = document.createElement('option');
-        option.value = name;
-        option.textContent = name;
-        animationSelect.appendChild(option);
-      });
-    });
-
-    // Change animation
-    animationSelect.addEventListener('change', () => {
-      const selected = animationSelect.value;
-      if (selected) {
-        viewer.animationName = selected;
-        viewer.play();
-      }
-    });
-  </script>
-
-</body>
-</html>
 
