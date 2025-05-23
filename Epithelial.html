@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Epithelial Viewer</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
@@ -11,6 +11,7 @@
       height: 100%;
       background-color: transparent;
       overflow: hidden;
+      font-family: Arial, sans-serif;
     }
 
     model-viewer {
@@ -49,6 +50,28 @@
     #pauseIcon {
       display: none;
     }
+
+    /* Rotate hint styling */
+    #rotateHint {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 16px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 6px 12px;
+      border-radius: 10px;
+      z-index: 999;
+      animation: fadeOut 4s ease-out forwards;
+      user-select: none;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      70% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
   </style>
 </head>
 <body>
@@ -61,13 +84,15 @@
     auto-rotate
     camera-controls
     disable-zoom
-    interaction-prompt="auto"
-    interaction-prompt-threshold="3000"
+    interaction-prompt="none"
     environment-image="neutral"
     shadow-intensity="0"
     exposure="1"
     style="background-color: transparent;">
   </model-viewer>
+
+  <!-- Rotate hint -->
+  <div id="rotateHint">↻ Click and drag to rotate</div>
 
   <div id="controls">
     <button id="playPauseButton" aria-label="Play/Pause">
@@ -86,7 +111,7 @@
     const playIcon = document.getElementById('playIcon');
     const pauseIcon = document.getElementById('pauseIcon');
 
-    // Pause at start
+    // Start paused
     modelViewer.addEventListener('load', () => {
       modelViewer.pause();
     });
