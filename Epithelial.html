@@ -1,18 +1,37 @@
-<model-viewer
-  src="Epithelial_v01_tk001.glb"
-  alt="3D model"
-  auto-rotate
-  camera-controls
-  autoplay
-  animation-name="*"
-  environment-image="neutral"
-  shadow-intensity="0"
-  disable-zoom
-  style="background-color: transparent;"
-  exposure="1"
-  ar
-  ar-modes="webxr scene-viewer quick-look"
-  reveal="auto">
-</model-viewer>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epithelial Viewer</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background-color: transparent;
+    }
+    model-viewer {
+      width: 100vw;
+      height: 100vh;
+      background-color: transparent;
+      --poster-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <model-viewer
+    src="Epithelial_v01_tk001.glb"
+    alt="3D model of epithelial cell"
+    autoplay
+    animation-name="*"
+    disable-zoom
+    disable-tap
+    environment-image="neutral"
+    shadow-intensity="0"
+    exposure="1"
+    style="background-color: transparent;">
+  </model-viewer>
+</body>
+</html>
 
