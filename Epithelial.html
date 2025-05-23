@@ -21,34 +21,27 @@
 
     #controls {
       position: absolute;
-      bottom: 20px;
+      bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
     }
 
     #playPauseButton {
-      background-color: black;
-      color: white;
+      background: none;
       border: none;
-      padding: 12px;
-      border-radius: 8px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 50px;
-      height: 50px;
+      padding: 8px;
     }
 
     #playPauseButton svg {
-      width: 24px;
-      height: 24px;
+      width: 40px;
+      height: 40px;
       fill: white;
     }
 
-    #playPauseButton:hover {
-      background-color: #222;
+    #playPauseButton:hover svg {
+      fill: #ccc;
     }
   </style>
 </head>
@@ -58,7 +51,6 @@
     id="model"
     src="Epithelial_v01_tk001.glb"
     alt="3D model of epithelial cell"
-    autoplay="false"
     animation-name="*"
     auto-rotate
     camera-controls
@@ -73,7 +65,6 @@
 
   <div id="controls">
     <button id="playPauseButton" aria-label="Play/Pause">
-      <!-- Start with play icon -->
       <svg id="playIcon" viewBox="0 0 24 24">
         <path d="M8 5v14l11-7z" />
       </svg>
@@ -89,8 +80,10 @@
     const playIcon = document.getElementById('playIcon');
     const pauseIcon = document.getElementById('pauseIcon');
 
-    // Start animation paused
-    modelViewer.pause();
+    // Make sure the animation is paused at load
+    modelViewer.addEventListener('load', () => {
+      modelViewer.pause();
+    });
 
     playButton.addEventListener('click', () => {
       if (modelViewer.paused) {
