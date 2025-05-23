@@ -62,3 +62,47 @@
     camera-controls
     disable-zoom
     interaction-prompt="auto"
+    interaction-prompt-threshold="3000"
+    environment-image="neutral"
+    shadow-intensity="0"
+    exposure="1"
+    style="background-color: transparent;">
+  </model-viewer>
+
+  <div id="controls">
+    <button id="playPauseButton" aria-label="Play/Pause">
+      <svg id="playIcon" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+      <svg id="pauseIcon" viewBox="0 0 24 24">
+        <path d="M6 5h4v14H6zm8 0h4v14h-4z" />
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    const modelViewer = document.getElementById('model');
+    const playButton = document.getElementById('playPauseButton');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+
+    // Pause at start
+    modelViewer.addEventListener('load', () => {
+      modelViewer.pause();
+    });
+
+    playButton.addEventListener('click', () => {
+      if (modelViewer.paused) {
+        modelViewer.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+      } else {
+        modelViewer.pause();
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>
