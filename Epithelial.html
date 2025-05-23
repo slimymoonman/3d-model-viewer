@@ -2,12 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>3D Model Viewer</title>
+  <title>Animated Model Viewer</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body { margin: 0; font-family: sans-serif; text-align: center; background: #111; color: white; }
+    #controls { padding: 1em; }
+    model-viewer { width: 100%; height: 80vh; }
+    button, select {
+      margin: 0.5em;
+      padding: 0.5em 1em;
+      font-size: 1em;
+    }
+  </style>
 </head>
 <body>
-  <model-viewer src="Epithelial_v01_tk001.glb" alt="A 3D model" auto-rotate camera-controls 
-    style="width: 100%; height: 100vh;">
+
+  <h1>Animated 3D Model</h1>
+
+  <model-viewer id="mv"
+    src="Epithelial_v01_tk001.glb"
+    alt="A 3D model"
+    auto-rotate
+    camera-controls
+    autoplay
+    animation-name="*"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    exposure="1"
+    shadow-intensity="1">
   </model-viewer>
+
+  <div id="controls">
+    <button id="play">Play</button>
+    <button id="pause">Pause</button>
+    <select id="animationSelect">
+      <option value="">-- Choose Animation --</option>
+    </select>
+  </div>
+
+  <script>
+    const viewer = document.getElementById('mv');
+    const playBtn = document.getElementById('play');
+    const pauseBtn = document.getElementById('pause');
+    const animationSelect = document.getElementById('animationSelect');
+
+    // Play button
+    playBtn.addEventListener('click', () => viewer.play());
+
+    // Pause button
+    pauseBtn.addEventListener('click', () => viewer.pause());
+
+    // Load available animations
+    viewer.addEventListener('load', () => {
+      const animations = viewer.availableAnimations;
+      animationSelect.innerHTML = '<option value="">-- Choose Animation --</option>';
+      animations.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        animationSelect.appendChild(option);
+      });
+    });
+
+    // Change animation
+    animationSelect.addEventListener('change', () => {
+      const selected = animationSelect.value;
+      if (selected) {
+        viewer.animationName = selected;
+        viewer.play();
+      }
+    });
+  </script>
+
 </body>
 </html>
+
