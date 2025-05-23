@@ -54,4 +54,59 @@
       color: white;
       padding: 10px 16px;
       border-radius: 8px;
-      font-size: 14
+      font-size: 14px;
+      z-index: 999;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <model-viewer
+    id="model"
+    src="Epithelial_v01_tk001.glb"
+    alt="3D model of epithelial cell"
+    animation-name="*"
+    auto-rotate
+    camera-controls
+    disable-zoom
+    environment-image="neutral"
+    shadow-intensity="0"
+    exposure="1"
+    style="background-color: transparent;"
+    autoplay="false">
+  </model-viewer>
+
+  <div id="hint">Click to animate & rotate</div>
+  <button id="playPauseBtn" aria-label="Play Animation" title="Play Animation">▶️</button>
+
+  <script>
+    const model = document.getElementById('model');
+    const btn = document.getElementById('playPauseBtn');
+    const hint = document.getElementById('hint');
+
+    let isPlaying = false;
+
+    btn.addEventListener('click', () => {
+      if (!isPlaying) {
+        model.play();
+        btn.textContent = '⏸️';
+        btn.setAttribute('aria-label', 'Pause Animation');
+        btn.setAttribute('title', 'Pause Animation');
+      } else {
+        model.pause();
+        btn.textContent = '▶️';
+        btn.setAttribute('aria-label', 'Play Animation');
+        btn.setAttribute('title', 'Play Animation');
+      }
+      isPlaying = !isPlaying;
+      hint.style.opacity = '0';
+    });
+
+    model.addEventListener('click', () => {
+      hint.style.opacity = '0';
+    });
+  </script>
+</body>
+</html>
