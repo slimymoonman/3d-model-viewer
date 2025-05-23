@@ -5,38 +5,23 @@
   <title>Epithelial Cell Animation</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    body {
+    html, body {
       margin: 0;
-      font-family: sans-serif;
-      text-align: center;
+      height: 100%;
       background: transparent;
-      color: white;
     }
 
     model-viewer {
-      width: 100%;
-      height: 80vh;
-      --poster-color: transparent;
+      width: 100vw;
+      height: 100vh;
       background-color: transparent;
-    }
-
-    #controls {
-      padding: 1em;
-      background: rgba(0, 0, 0, 0.6);
-    }
-
-    button, select {
-      margin: 0.5em;
-      padding: 0.5em 1em;
-      font-size: 1em;
+      --poster-color: transparent;
     }
   </style>
 </head>
 <body>
 
-  <h1>Epithelial Cell Animation</h1>
-
-  <model-viewer id="mv"
+  <model-viewer
     src="Epithelial_v01_tk001.glb"
     alt="A 3D model of an epithelial cell"
     auto-rotate
@@ -46,34 +31,13 @@
     environment-image="neutral"
     shadow-intensity="0"
     disable-zoom
-    style="background-color: transparent;"
     exposure="1"
     ar
     ar-modes="webxr scene-viewer quick-look"
-    reveal="auto">
+    reveal="auto"
+    style="background-color: transparent;">
   </model-viewer>
 
-  <div id="controls">
-    <button id="play">Play</button>
-    <button id="pause">Pause</button>
-    <select id="animationSelect">
-      <option value="">-- Choose Animation --</option>
-    </select>
-  </div>
-
-  <script>
-    const viewer = document.getElementById('mv');
-    const playBtn = document.getElementById('play');
-    const pauseBtn = document.getElementById('pause');
-    const animationSelect = document.getElementById('animationSelect');
-
-    // Play button
-    playBtn.addEventListener('click', () => viewer.play());
-
-    // Pause button
-    pauseBtn.addEventListener('click', () => viewer.pause());
-
-    //
-
-
+</body>
+</html>
 
