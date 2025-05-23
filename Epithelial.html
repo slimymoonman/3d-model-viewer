@@ -63,14 +63,14 @@
       padding: 6px 12px;
       border-radius: 10px;
       z-index: 999;
-      animation: fadeOut 4s ease-out forwards;
       user-select: none;
+      transition: opacity 0.5s ease;
+      opacity: 1;
     }
 
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      70% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
+    #rotateHint.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -110,6 +110,7 @@
     const playButton = document.getElementById('playPauseButton');
     const playIcon = document.getElementById('playIcon');
     const pauseIcon = document.getElementById('pauseIcon');
+    const rotateHint = document.getElementById('rotateHint');
 
     // Start paused
     modelViewer.addEventListener('load', () => {
@@ -127,6 +128,11 @@
         pauseIcon.style.display = 'none';
       }
     });
+
+    // Hide rotate hint after user interacts by moving camera
+    modelViewer.addEventListener('camera-change', () => {
+      rotateHint.classList.add('hidden');
+    }, { once: true }); // Only hide once on first interaction
   </script>
 
 </body>
