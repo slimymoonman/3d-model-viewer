@@ -8,7 +8,7 @@
   <style>
     body {
       margin: 0;
-      background: #00000000; /* transparent background */
+      background: #00000000; /* transparent */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -37,16 +37,18 @@
 
   <script>
     const model = document.getElementById('myModel');
-    let animationPlaying = true; // starts playing on load because of autoplay attribute
 
-    model.addEventListener('click', () => {
-      if(animationPlaying) {
-        model.pause();
-        animationPlaying = false;
-      } else {
-        model.play();
-        animationPlaying = true;
-      }
+    // Pause animation initially to not play on page load
+    model.pause();
+
+    // Play animation on mouse enter
+    model.addEventListener('mouseenter', () => {
+      model.play();
+    });
+
+    // Pause animation on mouse leave
+    model.addEventListener('mouseleave', () => {
+      model.pause();
     });
   </script>
 
