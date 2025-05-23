@@ -78,14 +78,28 @@
     const btn = document.getElementById('playPauseBtn');
     let isPlaying = true;
 
+    // Wait for model to be ready and animations loaded
+    model.addEventListener('load', () => {
+      // play() already called by autoplay
+      isPlaying = true;
+      btn.textContent = '⏸️';
+      btn.setAttribute('aria-label', 'Pause Animation');
+      btn.setAttribute('title', 'Pause Animation');
+    });
+
     btn.addEventListener('click', () => {
+      // model.animations is an array of THREE.AnimationAction
+      if (!model.animations || model.animations.length === 0) return;
+
       if (isPlaying) {
-        model.pause();
+        // Pause all animations
+        model.animations.forEach(anim => anim.pause());
         btn.textContent = '▶️';
         btn.setAttribute('aria-label', 'Play Animation');
         btn.setAttribute('title', 'Play Animation');
       } else {
-        model.play();
+        // Play all animations
+        model.animations.forEach(anim => anim.play());
         btn.textContent = '⏸️';
         btn.setAttribute('aria-label', 'Pause Animation');
         btn.setAttribute('title', 'Pause Animation');
