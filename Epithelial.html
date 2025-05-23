@@ -10,6 +10,7 @@
       margin: 0;
       height: 100%;
       background-color: transparent;
+      overflow: hidden;
     }
 
     model-viewer {
@@ -20,28 +21,33 @@
     }
 
     #controls {
-      position: absolute;
+      position: fixed;
       bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 10;
+      z-index: 1000;
     }
 
     #playPauseButton {
-      background: none;
+      background-color: black;
       border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
       cursor: pointer;
-      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #playPauseButton svg {
-      width: 40px;
-      height: 40px;
+      width: 24px;
+      height: 24px;
       fill: white;
     }
 
-    #playPauseButton:hover svg {
-      fill: #ccc;
+    #pauseIcon {
+      display: none;
     }
   </style>
 </head>
@@ -54,49 +60,5 @@
     animation-name="*"
     auto-rotate
     camera-controls
-    interaction-prompt="auto"
-    interaction-prompt-threshold="3000"
     disable-zoom
-    environment-image="neutral"
-    shadow-intensity="0"
-    exposure="1"
-    style="background-color: transparent;">
-  </model-viewer>
-
-  <div id="controls">
-    <button id="playPauseButton" aria-label="Play/Pause">
-      <svg id="playIcon" viewBox="0 0 24 24">
-        <path d="M8 5v14l11-7z" />
-      </svg>
-      <svg id="pauseIcon" viewBox="0 0 24 24" style="display: none;">
-        <path d="M6 5h4v14H6zm8 0h4v14h-4z" />
-      </svg>
-    </button>
-  </div>
-
-  <script>
-    const modelViewer = document.getElementById('model');
-    const playButton = document.getElementById('playPauseButton');
-    const playIcon = document.getElementById('playIcon');
-    const pauseIcon = document.getElementById('pauseIcon');
-
-    // Make sure the animation is paused at load
-    modelViewer.addEventListener('load', () => {
-      modelViewer.pause();
-    });
-
-    playButton.addEventListener('click', () => {
-      if (modelViewer.paused) {
-        modelViewer.play();
-        playIcon.style.display = 'none';
-        pauseIcon.style.display = 'block';
-      } else {
-        modelViewer.pause();
-        playIcon.style.display = 'block';
-        pauseIcon.style.display = 'none';
-      }
-    });
-  </script>
-
-</body>
-</html>
+    interaction-prompt="auto"
